@@ -1,4 +1,5 @@
-# ✦ O Portal das Encruzilhadas: As Pombagiras de Alexia Melusine ✦
+# ✦ O Portal das Encruzilhadas: 
+As Pombagiras de Alexia Melusine ✦
 
 ## Onde o Sagrado Encontra o Poder Feminino
 
