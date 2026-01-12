@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>As 24 Pombagiras - Enciclopédia Sagrada</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #8B0000;
+            --secondary: #FFD700;
+            --dark: #1a0a0a;
+            --light: #f5f5f5;
+            --accent: #FF1493;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d1b1b 50%, #1a0a0a 100%);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animação de fundo com efeitos */
+        @keyframes rain {
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .rain-effect {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: rgba(255, 215, 0, 0.3);
+            animation: rain 1s linear infinite;
+        }
+
+        .fire-effect {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #FF4500, transparent);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: flicker 0.5s infinite;
+        }
+
+        .rose-effect {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .header {
+            position: relative;
+            z-index: 10;
+            padding: 30px 20px;
+            background: linear-gradient(180deg, rgba(139, 0, 0, 0.8) 0%, transparent 100%);
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: nowrap;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            order: 1;
+        }
+
+        .social-buttons-right {
+            display: flex;
+            gap: 15px;
+            order: 3;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
+            background: rgba(139, 0, 0, 0.5);
+            color: var(--secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background: var(--secondary);
+            color: #000;
+            box-shadow: 0 0 15px var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .header-center {
+            text-align: center;
+            flex: 1;
+            min-width: 300px;
+            order: 2;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 0 0 20px var(--secondary), 0 0 40px var(--accent);
+            margin-bottom: 10px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .header-subtitle {
+            font-size: 1.3em;
+            color: var(--accent);
+            font-style: italic;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .header-tagline {
+            font-size: 1.1em;
+            color: var(--secondary);
+            font-style: italic;
+            text-shadow: 0 0 5px var(--accent);
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .navigation-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-btn {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.5) 0%, rgba(255, 20, 147, 0.3) 100%);
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 30px var(--secondary), 0 0 50px var(--accent);
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.5) 0%, rgba(139, 0, 0, 0.5) 100%);
+        }
+
+        .pombagiras-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .pombagira-card {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.3) 0%, rgba(255, 20, 147, 0.2) 100%);
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .pombagira-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 0 30px var(--secondary), 0 0 50px var(--accent);
+            border-color: var(--accent);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .pombagira-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .card-subtitle {
+            color: var(--accent);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .card-description {
+            color: #ddd;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+            overflow-y: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a0a0a 0%, #2d1b1b 100%);
+            margin: 20px auto;
+            padding: 30px;
+            border: 3px solid var(--secondary);
+            border-radius: 15px;
+            max-width: 800px;
+            box-shadow: 0 0 40px var(--secondary);
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            color: var(--secondary);
+            float: right;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .modal-header {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .modal-image {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 20px var(--secondary);
+        }
+
+        .modal-title {
+            flex: 1;
+        }
+
+        .modal-title h2 {
+            font-size: 2.5em;
+            color: var(--secondary);
+            text-shadow: 0 0 15px var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .modal-title p {
+            color: var(--accent);
+            font-size: 1.1em;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: rgba(139, 0, 0, 0.3);
+            padding: 15px;
+            border-left: 3px solid var(--secondary);
+            border-radius: 5px;
+        }
+
+        .info-label {
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #fff;
+            font-size: 1.1em;
+        }
+
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .section p {
+            color: #ddd;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .section ul {
+            list-style: none;
+            color: #ddd;
+        }
+
+        .section li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .section li:before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        .falange-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .falange-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--secondary);
+            color: #ddd;
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: rgba(139, 0, 0, 0.5);
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            background: var(--secondary);
+            color: #000;
+            box-shadow: 0 0 15px var(--secondary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(180deg, transparent 0%, rgba(139, 0, 0, 0.8) 100%);
+            border-top: 3px solid var(--secondary);
+            margin-top: 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer p {
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+
+        .footer-credit {
+            color: var(--accent);
+            font-size: 0.95em;
+            margin-top: 15px;
+            border-top: 1px solid var(--secondary);
+            padding-top: 15px;
+        }
+
+        .footer-contact {
+            color: #ddd;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header-subtitle {
+                font-size: 1em;
+            }
+
+            .header-tagline {
+                font-size: 0.9em;
+            }
+
+            .pombagiras-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-header {
+                flex-direction: column;
+            }
+
+            .modal-image {
+                width: 100%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            .header-top {
+                flex-direction: column;
+            }
+
+            .navigation-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .emoji-rain {
+            position: absolute;
+            font-size: 2em;
+            animation: rain 2s linear infinite;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-effects" id="bgEffects"></div>
+
+    <div class="header">
+        <div class="header-top">
+            <div class="social-buttons">
+                <a href="https://bio.site/AlmasdePombagira" target="_blank" class="social-btn" title="Bio Site">🌐</a>
+            </div>
+            <div class="header-center">
+                <h1>✦ As Pombagiras ✦</h1>
+            </div>
+            <div class="social-buttons-right">
+                <a href="https://alexialuzdeferro.github.io/melusine_redes/" target="_blank" class="social-btn" title="Redes Sociais">📱</a>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="header-subtitle">As Pombagiras mais conhecidas e raras das encruzilhadas</div>
+            <div class="header-tagline">Onde os caminhos se abrem e as almas encontram seu destino</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="navigation-buttons">
+            <a href="https://pombagiras.github.io/grimorio/" target="_blank" class="nav-btn">📖 GRIMÓRIO</a>
+            <a href="https://pombagiras.github.io/hub-central/" target="_blank" class="nav-btn">🌟 HUB</a>
+            <a href="https://pombagiras.github.io/melusine/" target="_blank" class="nav-btn">🔮 PORTAL</a>
+        </div>
+
+        <div class="pombagiras-grid" id="pombagirasList"></div>
+    </div>
+
+    <div id="pombagiraModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🌹 Respeito, Fé e Devoção às Pombagiras 🌹</p>
+        <p>Laroyê Pombagira! Que os caminhos se abram!</p>
+        <div class="footer-credit">
+            <p>Todos os direitos reservados © by Alexia Melusine</p>
+            <div class="footer-contact">
+                <p>📧 almasdepombagiras@gmail.com</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pombagiras = [
+            {
+                id: 1,
+                nome: "Maria Padilha",
+                energia: "Comando/Realeza",
+                signo: "Áries",
+                dia: "Segunda ou Sexta-feira",
+                lua: "Cheia",
+                cor: "Vermelho e Dourado",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/maria_padilha_1.png",
+                descricao: "Guerreira, intensa e decidida",
+                oferendas: "Champanhe, rosas vermelhas, cigarros finos, joias, perfumes",
+                respeitos: "Nunca usar roupas escuras ou sujas ao falar com ela",
+                dicas: "Trabalha para amor, poder e comando",
+                falanges: "Falange de Maria Padilha da Estrada, Maria Padilha da Encruzilhada, Maria Padilha da Praia, Maria Padilha das Sete Encruzilhadas",
+                historia: "Maria Padilha é conhecida como a Rainha das Pombagiras, uma entidade poderosa que trabalha com comando, realeza e autoridade. Ela é a protetora daqueles que buscam poder e liderança em suas vidas."
+            },
+            {
+                id: 2,
+                nome: "Maria Mulambo",
+                energia: "Cura/Humildade",
+                signo: "Touro",
+                dia: "Segunda-feira",
+                lua: "Minguante",
+                cor: "Roxo e Preto",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/maria_mulambo_1%20(1).png",
+                descricao: "Sensual, determinada e persistente",
+                oferendas: "Champanhe, rosas roxas/pretas, farofa com mel, frutas",
+                respeitos: "Tratar com extrema humildade e respeito",
+                dicas: "Ótima para limpeza espiritual e cura de traumas",
+                falanges: "Falange de Maria Mulambo da Estrada, Maria Mulambo da Encruzilhada, Maria Mulambo da Praia, Maria Mulambo das Almas",
+                historia: "Maria Mulambo é a pombagira da cura e da humildade. Ela trabalha com aqueles que precisam de limpeza espiritual profunda e cura de feridas emocionais."
+            },
+            {
+                id: 3,
+                nome: "Maria Quitéria",
+                energia: "Guerra/Proteção",
+                signo: "Escorpião",
+                dia: "Sexta-feira",
+                lua: "Nova ou Cheia",
+                cor: "Vermelho e Branco",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/maria_quiteria_1.png",
+                descricao: "Guerreira e protetora",
+                oferendas: "Champanhe, cigarrilhas longas, bijuterias, perfumes, velas vermelhas",
+                respeitos: "Aceita pedidos em encruzilhadas e cruzeiros",
+                dicas: "Proteção contra inimigos e demandas",
+                falanges: "Falange de Maria Quitéria da Estrada, Maria Quitéria da Encruzilhada, Maria Quitéria da Serra, Maria Quitéria das Almas",
+                historia: "Maria Quitéria é a guerreira das Pombagiras, conhecida por sua força e proteção. Ela defende seus filhos contra inimigos e demandas espirituais."
+            },
+            {
+                id: 4,
+                nome: "Rosa Caveira",
+                energia: "Justiça/Morte",
+                signo: "Capricórnio",
+                dia: "Segunda-feira",
+                lua: "Minguante",
+                cor: "Preto e Amarelo",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/rosa_caveira_1.png",
+                descricao: "Justiceira e transformadora",
+                oferendas: "Champanhe, rosas amarelas ou brancas, velas pretas e amarelas",
+                respeitos: "Silêncio e seriedade absoluta",
+                dicas: "Trabalha com a lei e justiça divina",
+                falanges: "Falange de Rosa Caveira da Estrada, Rosa Caveira da Encruzilhada, Rosa Caveira do Cemitério, Rosa Caveira das Almas",
+                historia: "Rosa Caveira é a pombagira da justiça e da transformação através da morte. Ela trabalha com a lei divina e a transmutação de energias."
+            },
+            {
+                id: 5,
+                nome: "Dama da Noite",
+                energia: "Mistério/Oculto",
+                signo: "Peixes",
+                dia: "Sábado",
+                lua: "Nova",
+                cor: "Branco e Azul",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/dama_da_noite_1.png",
+                descricao: "Misteriosa e intuitiva",
+                oferendas: "Champanhe, rosas brancas, perfumes suaves, velas azuis ou brancas",
+                respeitos: "Evitar barulho excessivo",
+                dicas: "Revela segredos e ajuda na intuição",
+                falanges: "Falange de Dama da Noite da Estrada, Dama da Noite da Encruzilhada, Dama da Noite da Sombra, Dama da Noite das Almas",
+                historia: "Dama da Noite é a pombagira do mistério e do oculto. Ela trabalha com revelações, intuição e conhecimentos escondidos."
+            },
+            {
+                id: 6,
+                nome: "Sete Saias",
+                energia: "Alegria/Intensidade",
+                signo: "Sagitário",
+                dia: "Quinta-feira",
+                lua: "Crescente",
+                cor: "Sete cores",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/sete_saias_1.png",
+                descricao: "Alegre e intensa",
+                oferendas: "Champanhe, 7 tipos de frutas, 7 rosas coloridas, fitas coloridas",
+                respeitos: "Alegria e dança",
+                dicas: "Prosperidade e abertura de caminhos",
+                falanges: "Falange de Sete Saias da Estrada, Sete Saias da Encruzilhada, Sete Saias da Praia, Sete Saias das Almas",
+                historia: "Sete Saias é a pombagira da alegria e da intensidade. Ela trabalha com prosperidade, abertura de caminhos e celebração da vida."
+            },
+            {
+                id: 7,
+                nome: "Cigana",
+                energia: "Liberdade/Prosperidade",
+                signo: "Aquário",
+                dia: "Terça-feira",
+                lua: "Crescente",
+                cor: "Multicolorido",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/cigana_1.png",
+                descricao: "Livre e próspera",
+                oferendas: "Vinho doce, frutas, baralho, moedas, lenços coloridos",
+                respeitos: "Liberdade de escolha",
+                dicas: "Dinheiro, viagens e liberdade",
+                falanges: "Falange de Cigana da Estrada, Cigana da Encruzilhada, Cigana da Praia, Cigana das Almas",
+                historia: "Cigana é a pombagira da liberdade e da prosperidade. Ela trabalha com dinheiro, viagens e a libertação de amarras."
+            },
+            {
+                id: 8,
+                nome: "Maria Navalha",
+                energia: "Malandragem/Rua",
+                signo: "Gêmeos",
+                dia: "Segunda-feira",
+                lua: "Cheia",
+                cor: "Vermelho e Branco",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/maria_navalha_1.png",
+                descricao: "Malandra e protetora das ruas",
+                oferendas: "Cerveja gelada, cigarro de filtro branco, navalha (simbólica), batom vermelho",
+                respeitos: "Honestidade e papo reto",
+                dicas: "Proteção nas ruas e solução de problemas difíceis",
+                falanges: "Falange de Maria Navalha da Estrada, Maria Navalha da Encruzilhada, Maria Navalha da Praia, Maria Navalha das Almas",
+                historia: "Maria Navalha é a pombagira da malandragem e proteção nas ruas. Ela trabalha com aqueles que precisam de coragem e proteção."
+            },
+            {
+                id: 9,
+                nome: "Da Praia",
+                energia: "Emoção/Limpeza (Água)",
+                signo: "Câncer",
+                dia: "Sábado",
+                lua: "Cheia",
+                cor: "Branco e Azul",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_praia_1.png",
+                descricao: "Emocional e limpadora",
+                oferendas: "Champanhe, rosas brancas, espelhos, pentes, mel",
+                respeitos: "Entregar na areia da praia",
+                dicas: "Limpeza emocional e amor",
+                falanges: "Falange de Pombagira da Praia da Estrada, da Praia da Encruzilhada, da Praia da Lua, da Praia das Almas",
+                historia: "Pombagira da Praia é a entidade das emoções e da limpeza através da água. Ela trabalha com cura emocional e amor."
+            },
+            {
+                id: 10,
+                nome: "Maria Farrapo",
+                energia: "Sanidade/Caos (Mental)",
+                signo: "Virgem",
+                dia: "Segunda-feira",
+                lua: "Minguante",
+                cor: "Multicolorido",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/maria_farrapo_1.png",
+                descricao: "Equilibradora mental",
+                oferendas: "Cachaça ou champanhe, trapos de pano (simbólicos), velas bicolores",
+                respeitos: "Não julgar pelas aparências",
+                dicas: "Equilíbrio mental e descarrego",
+                falanges: "Falange de Maria Farrapo da Estrada, Maria Farrapo da Encruzilhada, Maria Farrapo da Figueira, Maria Farrapo das Almas",
+                historia: "Maria Farrapo é a pombagira do equilíbrio mental e da sanidade. Ela trabalha com aqueles que enfrentam caos emocional e mental."
+            },
+            {
+                id: 11,
+                nome: "Menina",
+                energia: "Renovação/Inocência",
+                signo: "Libra",
+                dia: "Sexta-feira",
+                lua: "Crescente",
+                cor: "Rosa e Branco",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/menina_1.png",
+                descricao: "Jovem e renovadora",
+                oferendas: "Champanhe rosé, doces finos, fitas rosas, perfumes doces",
+                respeitos: "Tratar com doçura e carinho",
+                dicas: "Novos começos e juventude",
+                falanges: "Falange de Menina da Estrada, Menina da Encruzilhada, Menina da Praia, Menina das Almas",
+                historia: "Menina é a pombagira da renovação e da inocência. Ela trabalha com novos começos, juventude e esperança."
+            },
+            {
+                id: 12,
+                nome: "Da Figueira",
+                energia: "Raiz/Ancestralidade (Terra)",
+                signo: "Touro",
+                dia: "Quinta-feira",
+                lua: "Nova",
+                cor: "Verde e Marrom",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_figueira_1.png",
+                descricao: "Ancestral e enraizada",
+                oferendas: "Vinho tinto, figos, mel, velas verdes e marrons",
+                respeitos: "Entregar ao pé de uma figueira ou árvore frondosa",
+                dicas: "Estabilidade e conexão com ancestrais",
+                falanges: "Falange de Pombagira da Figueira da Estrada, da Figueira da Encruzilhada, da Figueira da Serra, da Figueira das Almas",
+                historia: "Pombagira da Figueira é a entidade da ancestralidade e das raízes. Ela trabalha com estabilidade e conexão com os ancestrais."
+            },
+            {
+                id: 13,
+                nome: "Das Almas",
+                energia: "Transmutação/Passagem",
+                signo: "Escorpião",
+                dia: "Segunda-feira",
+                lua: "Minguante",
+                cor: "Branco e Preto",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/das_almas_1.png",
+                descricao: "Transmutadora de almas",
+                oferendas: "Champanhe, rosas brancas, velas brancas e pretas, farofa de dendê",
+                respeitos: "Silêncio absoluto e respeito aos mortos",
+                dicas: "Ajuda no desapego e na evolução espiritual",
+                falanges: "Falange de Pombagira das Almas da Estrada, das Almas da Encruzilhada, das Almas do Cemitério, das Almas da Calunga",
+                historia: "Pombagira das Almas é a entidade da transmutação e da passagem. Ela trabalha com desapego e evolução espiritual."
+            },
+            {
+                id: 14,
+                nome: "Sete Encruzilhadas",
+                energia: "Caminhos/Decisões",
+                signo: "Sagitário",
+                dia: "Segunda ou Sexta-feira",
+                lua: "Cheia",
+                cor: "Vermelho e Preto",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/sete_encruzilhadas_1.png",
+                descricao: "Rainha das encruzilhadas",
+                oferendas: "Champanhe, 7 velas vermelhas e pretas, 7 cigarros, 7 rosas vermelhas",
+                respeitos: "Pedir licença ao entrar em qualquer encruzilhada",
+                dicas: "Abertura de caminhos e decisões importantes",
+                falanges: "Falange de Sete Encruzilhadas da Estrada, Sete Encruzilhadas da Praia, Sete Encruzilhadas da Serra, Sete Encruzilhadas das Almas",
+                historia: "Pombagira Sete Encruzilhadas é a rainha das encruzilhadas e das decisões. Ela trabalha com abertura de caminhos e escolhas importantes."
+            },
+            {
+                id: 15,
+                nome: "Da Lua",
+                energia: "Intuição/Ciclos",
+                signo: "Câncer",
+                dia: "Segunda-feira",
+                lua: "Todas (especialmente Cheia)",
+                cor: "Branco e Prata",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_lua_1.png",
+                descricao: "Intuitiva e cíclica",
+                oferendas: "Champanhe, flores brancas, espelhos, prata, leite",
+                respeitos: "Conexão com o feminino e as marés",
+                dicas: "Fortalece a intuição e o magnetismo pessoal",
+                falanges: "Falange de Pombagira da Lua da Estrada, da Lua da Encruzilhada, da Lua da Praia, da Lua das Almas",
+                historia: "Pombagira da Lua é a entidade da intuição e dos ciclos. Ela trabalha com o magnetismo pessoal e a conexão com o feminino sagrado."
+            },
+            {
+                id: 16,
+                nome: "Das Trevas",
+                energia: "Proteção/Combate",
+                signo: "Capricórnio",
+                dia: "Segunda-feira",
+                lua: "Nova",
+                cor: "Preto e Roxo",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/das_trevas_1.png",
+                descricao: "Protetora das trevas",
+                oferendas: "Cachaça, velas pretas, rosas pretas ou roxas escuras",
+                respeitos: "Muita seriedade, não brincar com sua força",
+                dicas: "Proteção contra magias negativas pesadas",
+                falanges: "Falange de Pombagira das Trevas da Estrada, das Trevas da Encruzilhada, das Trevas da Sombra, das Trevas das Almas",
+                historia: "Pombagira das Trevas é a entidade da proteção contra magias negativas. Ela trabalha com força e seriedade."
+            },
+            {
+                id: 17,
+                nome: "Da Serra",
+                energia: "Força/Superação",
+                signo: "Áries",
+                dia: "Quinta-feira",
+                lua: "Crescente",
+                cor: "Verde e Vermelho",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_serra_1.png",
+                descricao: "Forte e superadora",
+                oferendas: "Vinho tinto, frutas silvestres, velas verdes e vermelhas",
+                respeitos: "Entregar em locais altos ou matas",
+                dicas: "Ajuda a superar obstáculos difíceis e subir na vida",
+                falanges: "Falange de Pombagira da Serra da Estrada, da Serra da Encruzilhada, da Serra da Praia, da Serra das Almas",
+                historia: "Pombagira da Serra é a entidade da força e da superação. Ela trabalha com aqueles que precisam vencer obstáculos."
+            },
+            {
+                id: 18,
+                nome: "Do Fogo",
+                energia: "Paixão/Transformação",
+                signo: "Leão",
+                dia: "Terça-feira",
+                lua: "Cheia",
+                cor: "Vermelho e Laranja",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/do_fogo_1.png",
+                descricao: "Apaixonada e transformadora",
+                oferendas: "Champanhe, velas vermelhas, pimenta, rosas vermelhas abertas",
+                respeitos: "Cuidado com o elemento fogo",
+                dicas: "Acende a paixão e transmuta energias negativas",
+                falanges: "Falange de Pombagira do Fogo da Estrada, do Fogo da Encruzilhada, do Fogo da Praia, do Fogo das Almas",
+                historia: "Pombagira do Fogo é a entidade da paixão e da transformação. Ela trabalha com transmutação de energias e acendimento da paixão."
+            },
+            {
+                id: 19,
+                nome: "Das Águas Profundas",
+                energia: "Inconsciente/Emoções",
+                signo: "Peixes",
+                dia: "Sábado",
+                lua: "Cheia",
+                cor: "Azul e Branco",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/das_aguas_profundas_1.png",
+                descricao: "Profunda e emocional",
+                oferendas: "Champanhe rosé, flores azuis ou brancas, conchas, pérolas",
+                respeitos: "Respeito ao mistério das profundezas",
+                dicas: "Cura emocional profunda e autoconhecimento",
+                falanges: "Falange de Pombagira das Águas Profundas da Estrada, das Águas Profundas da Encruzilhada, das Águas Profundas da Praia, das Águas Profundas das Almas",
+                historia: "Pombagira das Águas Profundas é a entidade do inconsciente e das emoções profundas. Ela trabalha com cura emocional e autoconhecimento."
+            },
+            {
+                id: 20,
+                nome: "Da Sombra",
+                energia: "Ocultismo/Revelação",
+                signo: "Escorpião",
+                dia: "Sábado",
+                lua: "Nova",
+                cor: "Roxo e Preto",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_sombra_1.png",
+                descricao: "Reveladora de sombras",
+                oferendas: "Vinho tinto, velas roxas, incenso de mirra",
+                respeitos: "Trabalha no que está escondido",
+                dicas: "Revela a verdade e protege contra traições",
+                falanges: "Falange de Pombagira da Sombra da Estrada, da Sombra da Encruzilhada, da Sombra da Praia, da Sombra das Almas",
+                historia: "Pombagira da Sombra é a entidade do ocultismo e da revelação. Ela trabalha com a verdade escondida e proteção contra traições."
+            },
+            {
+                id: 21,
+                nome: "Da Fenda",
+                energia: "Equilíbrio/Passagem",
+                signo: "Virgem",
+                dia: "Quarta-feira",
+                lua: "Minguante",
+                cor: "Cinza e Branco",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_fenda_1.png",
+                descricao: "Equilibradora de passagens",
+                oferendas: "Champanhe, velas bicolores, pedras naturais",
+                respeitos: "Entregar em fendas de rochas ou grutas",
+                dicas: "Ajuda a encontrar o equilíbrio em situações de crise",
+                falanges: "Falange de Pombagira da Fenda da Estrada, da Fenda da Encruzilhada, da Fenda da Serra, da Fenda das Almas",
+                historia: "Pombagira da Fenda é a entidade do equilíbrio e das passagens. Ela trabalha com aqueles que enfrentam crises e transições."
+            },
+            {
+                id: 22,
+                nome: "Da Calunga Profunda",
+                energia: "Ancestralidade/Morte",
+                signo: "Capricórnio",
+                dia: "Segunda-feira",
+                lua: "Nova",
+                cor: "Preto e Roxo",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_calunga_profunda_1.png",
+                descricao: "Ancestral das profundezas",
+                oferendas: "Cachaça, velas pretas e roxas, terra de cemitério (simbólica)",
+                respeitos: "Respeito máximo ao campo santo",
+                dicas: "Conexão com antepassados e limpeza pesada",
+                falanges: "Falange de Pombagira da Calunga Profunda da Estrada, da Calunga Profunda da Encruzilhada, da Calunga Profunda do Cemitério, da Calunga Profunda das Almas",
+                historia: "Pombagira da Calunga Profunda é a entidade da ancestralidade e da morte. Ela trabalha com conexão aos antepassados e limpeza profunda."
+            },
+            {
+                id: 23,
+                nome: "Das Correntes",
+                energia: "Libertação/Quebra de Demandas",
+                signo: "Aquário",
+                dia: "Segunda-feira",
+                lua: "Crescente",
+                cor: "Azul Escuro e Prata",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/das_correntes_1.png",
+                descricao: "Libertadora de amarras",
+                oferendas: "Champanhe, correntes de metal (simbólicas), velas azuis escuras",
+                respeitos: "Foco na liberdade",
+                dicas: "Quebra amarras espirituais e emocionais",
+                falanges: "Falange de Pombagira das Correntes da Estrada, das Correntes da Encruzilhada, das Correntes da Praia, das Correntes das Almas",
+                historia: "Pombagira das Correntes é a entidade da libertação. Ela trabalha com quebra de amarras espirituais e emocionais."
+            },
+            {
+                id: 24,
+                nome: "Da Neblina",
+                energia: "Mistério/Proteção",
+                signo: "Gêmeos",
+                dia: "Quarta-feira",
+                lua: "Nova",
+                cor: "Cinza e Branco",
+                imagem: "https://raw.githubusercontent.com/pombagiras/melusine/refs/heads/main/da_neblina_1.png",
+                descricao: "Protetora do mistério",
+                oferendas: "Champanhe, incensos, velas cinzas ou brancas",
+                respeitos: "Trabalha no invisível",
+                dicas: "Confunde inimigos e protege a caminhada",
+                falanges: "Falange de Pombagira da Neblina da Estrada, da Neblina da Encruzilhada, da Neblina da Praia, da Neblina das Almas",
+                historia: "Pombagira da Neblina é a entidade do mistério e da proteção invisível. Ela trabalha confundindo inimigos e protegendo a caminhada."
+            }
+        ];
+
+        let currentPombagira = null;
+
+        function createPombagiraCard(pombagira) {
+            return `
+                <div class="pombagira-card" onclick="openModal(${pombagira.id})">
+                    <img src="${pombagira.imagem}" alt="${pombagira.nome}" class="card-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22250%22%3E%3Crect fill=%22%23333%22 width=%22280%22 height=%22250%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2220%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E${pombagira.nome}%3C/text%3E%3C/svg%3E'">
+                    <div class="card-content">
+                        <div class="card-title">${pombagira.nome}</div>
+                        <div class="card-subtitle">${pombagira.energia}</div>
+                        <div class="card-description">${pombagira.descricao}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPombagiras(filter = '') {
+            const list = document.getElementById('pombagirasList');
+            const filtered = pombagiras.filter(p => 
+                p.nome.toLowerCase().includes(filter.toLowerCase()) ||
+                p.energia.toLowerCase().includes(filter.toLowerCase())
+            );
+            list.innerHTML = filtered.map(p => createPombagiraCard(p)).join('');
+        }
+
+        function openModal(id) {
+            currentPombagira = pombagiras.find(p => p.id === id);
+            const modal = document.getElementById('pombagiraModal');
+            const body = document.getElementById('modalBody');
+            
+            body.innerHTML = `
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div class="modal-header">
+                    <img src="${currentPombagira.imagem}" alt="${currentPombagira.nome}" class="modal-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22250%22%3E%3Crect fill=%22%23333%22 width=%22200%22 height=%22250%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E${currentPombagira.nome}%3C/text%3E%3C/svg%3E'">
+                    <div class="modal-title">
+                        <h2>${currentPombagira.nome}</h2>
+                        <p>${currentPombagira.energia}</p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">Signo</div>
+                                <div class="info-value">${currentPombagira.signo}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Dia</div>
+                                <div class="info-value">${currentPombagira.dia}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Lua</div>
+                                <div class="info-value">${currentPombagira.lua}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Cor</div>
+                                <div class="info-value">${currentPombagira.cor}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab(event, 'historia')">📖 História</button>
+                    <button class="tab-button" onclick="switchTab(event, 'oferendas')">🌹 Oferendas</button>
+                    <button class="tab-button" onclick="switchTab(event, 'respeitos')">🙏 Respeitos</button>
+                    <button class="tab-button" onclick="switchTab(event, 'dicas')">✨ Dicas</button>
+                    <button class="tab-button" onclick="switchTab(event, 'falanges')">👥 Falanges</button>
+                </div>
+
+                <div id="historia" class="tab-content active">
+                    <div class="section">
+                        <h3>📖 História e Energia</h3>
+                        <p>${currentPombagira.historia}</p>
+                    </div>
+                </div>
+
+                <div id="oferendas" class="tab-content">
+                    <div class="section">
+                        <h3>🌹 Oferendas Sagradas</h3>
+                        <p>${currentPombagira.oferendas}</p>
+                    </div>
+                </div>
+
+                <div id="respeitos" class="tab-content">
+                    <div class="section">
+                        <h3>🙏 Respeitos e Protocolos</h3>
+                        <p>${currentPombagira.respeitos}</p>
+                    </div>
+                </div>
+
+                <div id="dicas" class="tab-content">
+                    <div class="section">
+                        <h3>✨ Dicas de Trabalho</h3>
+                        <p>${currentPombagira.dicas}</p>
+                    </div>
+                </div>
+
+                <div id="falanges" class="tab-content">
+                    <div class="section">
+                        <h3>👥 Falanges Associadas</h3>
+                        <div class="falange-list">
+                            ${currentPombagira.falanges.split(',').map(f => `<div class="falange-item">${f.trim()}</div>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            createEmojiRain();
+        }
+
+        function closeModal() {
+            document.getElementById('pombagiraModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function switchTab(event, tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function createEmojiRain() {
+            const emojis = ['🌹', '🔥', '⚡', '🎭', '💀', '🕯️', '💎', '👑'];
+            const bgEffects = document.getElementById('bgEffects');
+            
+            for (let i = 0; i < 15; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji-rain';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + '%';
+                emoji.style.animationDelay = Math.random() * 1 + 's';
+                bgEffects.appendChild(emoji);
+                
+                setTimeout(() => emoji.remove(), 3000);
+            }
+        }
+
+        function createBackgroundEffects() {
+            const bgEffects = document.getElementById('bgEffects');
+            
+            // Criar efeitos de chuva
+            for (let i = 0; i < 50; i++) {
+                const rain = document.createElement('div');
+                rain.className = 'rain-effect';
+                rain.style.left = Math.random() * 100 + '%';
+                rain.style.animationDelay = Math.random() * 2 + 's';
+                rain.style.animationDuration = (1 + Math.random() * 1) + 's';
+                bgEffects.appendChild(rain);
+            }
+            
+            // Criar efeitos de fogo
+            for (let i = 0; i < 10; i++) {
+                const fire = document.createElement('div');
+                fire.className = 'fire-effect';
+                fire.style.left = Math.random() * 100 + '%';
+                fire.style.top = Math.random() * 100 + '%';
+                fire.style.animationDelay = Math.random() * 1 + 's';
+                bgEffects.appendChild(fire);
+            }
+            
+            // Criar efeitos de rosas
+            const roses = ['🌹', '🥀', '💐'];
+            for (let i = 0; i < 15; i++) {
+                const rose = document.createElement('div');
+                rose.className = 'rose-effect';
+                rose.textContent = roses[Math.floor(Math.random() * roses.length)];
+                rose.style.left = Math.random() * 100 + '%';
+                rose.style.top = Math.random() * 100 + '%';
+                rose.style.animationDelay = Math.random() * 3 + 's';
+                bgEffects.appendChild(rose);
+            }
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('pombagiraModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPombagiras();
+            createBackgroundEffects();
+        });
+    </script>
+</body>
+</html>
